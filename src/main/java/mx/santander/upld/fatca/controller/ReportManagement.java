@@ -35,8 +35,8 @@ public class ReportManagement implements IReportManagement {
 		reports.add(new Report(2,"Ligustrum obtusifolium Siebold & Zucc.","Sweden","Casa de bolsa",2022,4684,
 				"2021-11-27 18:03:49", "2023-01-08 00:42:48", "Listo para Envio", "En Revision"));
 		
-		 ZoneId zone = ZoneId.systemDefault();
-		    LOG.debug("Output of systemDefault()-: {} - time -: {}", zone, ZonedDateTime.now(ZoneId.of("GTM")).toString());
+//		 ZoneId zone = ZoneId.systemDefault();
+//		    LOG.debug("Output of systemDefault()-: {} - time -: {}", zone, ZonedDateTime.now(ZoneId.of("GTM")).toString());
 		
 		return new ResponseEntity<>(reports, HttpStatus.OK);
 	}
