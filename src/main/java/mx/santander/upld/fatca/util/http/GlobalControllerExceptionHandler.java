@@ -2,6 +2,7 @@ package mx.santander.upld.fatca.util.http;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import mx.santander.upld.fatca.exceptions.InvalidInputException;
 import mx.santander.upld.fatca.exceptions.NotFoundException;
+import mx.santander.upld.fatca.exceptions.UnauthorizedException;
 
 
 @RestControllerAdvice
@@ -35,6 +37,14 @@ class GlobalControllerExceptionHandler {
     ServerHttpRequest request, InvalidInputException ex) {
 
     return createHttpErrorInfo(UNPROCESSABLE_ENTITY, request, ex);
+  }
+  
+  @ResponseStatus(UNAUTHORIZED)
+  @ExceptionHandler(UnauthorizedException.class)
+  public @ResponseBody HttpErrorInfo handleUnauthorizedException(
+    ServerHttpRequest request, UnauthorizedException ex) {
+
+    return createHttpErrorInfo(UNAUTHORIZED, request, ex);
   }
 
   private HttpErrorInfo createHttpErrorInfo(

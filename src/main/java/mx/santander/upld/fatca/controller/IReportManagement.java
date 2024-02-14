@@ -1,11 +1,10 @@
 package mx.santander.upld.fatca.controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 
-import mx.santander.upld.fatca.model.Report;
+import mx.santander.upld.fatca.exceptions.UnauthorizedException;
 
 /**
  * @author x661902
@@ -14,7 +13,7 @@ import mx.santander.upld.fatca.model.Report;
 public interface IReportManagement {
 	
 	@GetMapping(value = "/reporte", produces = "application/json")
-	ResponseEntity<Object> getAll();
+	ResponseEntity<Object> getAll(@RequestHeader(value="Authorization") String authorizationHeader);
 	
 	 
 
