@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 import mx.santander.upld.fatca.exceptions.UnauthorizedException;
 import mx.santander.upld.fatca.model.Report;
@@ -43,7 +44,7 @@ public class ReportManagement implements IReportManagement {
 			}
 				
 			
-		} catch (IOException e) {
+		} catch (IOException | Unauthorized e) {
 			e.printStackTrace();
 		}
 		

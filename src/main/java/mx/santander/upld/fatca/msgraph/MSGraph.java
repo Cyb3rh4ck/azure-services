@@ -9,10 +9,12 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.oauth2.sdk.http.HTTPResponse;
 
+import mx.santander.upld.fatca.exceptions.UnauthorizedException;
 import mx.santander.upld.fatca.model.UserGraph;
 
 /**
@@ -30,7 +32,7 @@ public class MSGraph {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MSGraph.class);
 	
-	public UserGraph getUserDataFromGraph(String accessToken) throws IOException{
+	public UserGraph getUserDataFromGraph(String accessToken) throws IOException, Unauthorized{
 		
 		UserGraph user = new UserGraph();
 		
@@ -60,7 +62,7 @@ public class MSGraph {
             LOG.info(user.getDisplayName());
             return user;
         } else {
-            return user;
+            throw new UnauthorizedException(accessToken);
         }
 		
 	}
